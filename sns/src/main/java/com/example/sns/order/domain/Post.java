@@ -1,10 +1,14 @@
 package com.example.sns.order.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Table(name = "post")
+@Getter
 public class Post {
 
 	@Id
@@ -22,20 +26,25 @@ public class Post {
 	private String content;
 	
 	@Column(name="created_at")
-	private Date createdAt;
+	private LocalDate createdAt;
 	
 	public Post() {
 		super();
+	}
+
+	public Post(LocalDate localDate) {
+		//transform localDate to Date
+        this.createdAt = localDate;
 	}
 
 	public Post(Long userId, String title, String content) {
 		this.userId = userId;
 		this.title = title;
 		this.content = content;
-		this.createdAt = new Date();
+		this.createdAt = LocalDate.now();
 	}
 
-	public Post(Long id, Long userId, String title, String content, Date createdAt) {
+	public Post(Long id, Long userId, String title, String content, LocalDate createdAt) {
 		super();
 		this.id = id;
 		this.userId = userId;
