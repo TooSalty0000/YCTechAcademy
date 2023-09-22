@@ -9,11 +9,11 @@ import java.util.Date;
 @Entity
 @Table(name = "post")
 @Getter
-public class Post {
+public class Post  {
 
 	@Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", updatable = false)
 	private Long id;
 	
 	@Column(name="user_id")

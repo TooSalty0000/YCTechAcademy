@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 @Configuration
 @Profile("dev")
 public class DevDataSourceConfig {
+
     @Bean
     public DataSource dataSource() {
         return DataSourceBuilder

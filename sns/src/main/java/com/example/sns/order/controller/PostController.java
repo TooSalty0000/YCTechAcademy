@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "Post Controller")
@@ -31,7 +32,13 @@ public class PostController {
     )
     @GetMapping("/")
     public ResultDto<List<PostDto>> getAllPosts() {
-        return null;
+        List<PostDto> postDtoList = new ArrayList<PostDto>();
+        List<Post> postList = postService.getPostList();
+        for (Post post : postList) {
+            PostDto postDto = new PostDto(post.getTitle(), post.getContent());
+            postDtoList.add(postDto);
+        }
+        return ResultDto.success(postDtoList);
     }
 
     @Operation(
@@ -43,6 +50,9 @@ public class PostController {
             @Parameter(description = "Post ID")
             @PathVariable String id) {
         Post post = postService.getPost(Long.parseLong(id));
+        if (post == null) {
+            return ResultDto.fail("Post not found");
+        }
         PostDto postDto = new PostDto(post.getTitle(), post.getContent());
 
         return ResultDto.success(postDto);
@@ -55,6 +65,8 @@ public class PostController {
     @PostMapping("/new")
     public ResultDto<PostDto> newPost(@Parameter(name = "dto", description = "post dto")
                                           @RequestBody PostDto dto) {
-        return null;
+        Post post = postService.addPost(dto.title(), dto.content());
+        PostDto postDto = new PostDto(post.getTitle(), post.getContent());
+        return ResultDto.success(postDto);
     }
 }
