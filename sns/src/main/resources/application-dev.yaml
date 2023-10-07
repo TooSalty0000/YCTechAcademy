@@ -1,9 +1,12 @@
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
 spring:
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
   jpa:
     hibernate:
       dialect: org.hibernate.dialect.H2Dialect
@@ -12,15 +15,17 @@ spring:
     format-sql: true
     properties:
       hibernate:
-        id.new_generator_mappings: false
         format_sql: true
+        show_sql: true
+    defer-datasource-initialization: true
+
   h2:
     console:
       enabled: true
 
 springdoc:
   packages-to-scan:
-    - com.example.sns.order.controller
+    - com.msa.post.controller
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
   swagger-ui:
