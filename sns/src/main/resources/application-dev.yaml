@@ -1,4 +1,9 @@
 spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
   jpa:
     hibernate:
       dialect: org.hibernate.dialect.H2Dialect
@@ -8,14 +13,14 @@ spring:
     properties:
       hibernate:
         id.new_generator_mappings: false
-
+        format_sql: true
   h2:
     console:
       enabled: true
 
 springdoc:
   packages-to-scan:
-    - com.example.sns.controller
+    - com.example.sns.order.controller
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
   swagger-ui:

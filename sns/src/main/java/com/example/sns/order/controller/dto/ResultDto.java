@@ -6,10 +6,10 @@ public record ResultDto<T>(
         T data
 ) {
     public static <T> ResultDto<T> success(T data) {
-        return new ResultDto<>(0, "success", data);
+        return new ResultDto<>(200, "success", data);
     }
 
     public static <T> ResultDto<T> fail(String message) {
-        return new ResultDto<>(-1, message, null);
+        return new ResultDto<>(401, message, null);
     }
 }
