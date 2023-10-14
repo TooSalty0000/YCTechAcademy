@@ -1,4 +1,6 @@
 package com.msa.auth;
+
+import com.msa.auth.domain.JwtCode;
 import com.msa.member.domain.RefreshToken;
 import com.msa.member.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
@@ -7,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -19,6 +22,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
